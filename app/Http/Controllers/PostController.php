@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,10 +15,11 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
+        $post = new Post();
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->save();
 
-        return [
-            'success' => true,
-            'data' => $request->validated(),
-        ];
+        return redirect()->back()->withSuccess('Post wurde erfolgreich erstellt!');
     }
 }

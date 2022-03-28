@@ -1,13 +1,17 @@
 @include('includes.errors')
 
+@if (session('success'))
+    {{ session('success') }}
+@endif
+
 <form action="{{ route('post.store') }}" method="POST">
     @csrf
-    <input type="text" name="name" value="{{ old('name') }}">
-    @error('name')
+    <input type="text" name="title" value="{{ old('title') }}">
+    @error('title')
         <p>{{ $message }}</p>
     @enderror
     <br><br>
-    <input type="text" name="age">
+    <textarea name="content"></textarea>
     <br><br>
     <input type="submit" value="Speichern">
 </form>
