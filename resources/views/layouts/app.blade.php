@@ -6,8 +6,8 @@
     <body>
 
         <ul>
-            <li>Home</li>
-            <li>Test</li>
+            {{-- <li><a href="{{ route('test') }}">Test</a></li> --}}
+            <li><a href="{{ route('test2') }}">Test 2</a></li>
         </ul>
 
         @yield('content')

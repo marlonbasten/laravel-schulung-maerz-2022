@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', [TestController::class, 'test']);
+Route::get('/test/{name}/{age?}', [TestController::class, 'test'])->name('test');
 
-Route::get('/test2', function () {
-    return view('test2');
+Route::get('/test2', [TestController::class, 'test2'])->name('test2');
+
+Route::prefix('/posts')->name('post.')->group(function () {
+
+    Route::get('/', [])->name('index');
+    Route::post('/', [PostController::class, 'store'])->name('store');
+    Route::get('/create', [PostController::class, 'create'])->name('create');
+
 });
