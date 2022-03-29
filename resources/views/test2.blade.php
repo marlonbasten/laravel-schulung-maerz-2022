@@ -2,9 +2,11 @@
 
 @section('content')
 
-    <h1>Das ist meine Test2 Datei!</h1>
+    <h1>{{ __('This is my test2 file!') }}</h1>
 
-    <h2>Age: {{ $age }}</h2>
+    <h2>{{ __('general.age', ['age' => $age]) }}</h2>
+
+    {{ trans_choice('Mein Satz', 2) }}
 
     @include('includes.list', [
         'users' => $users,

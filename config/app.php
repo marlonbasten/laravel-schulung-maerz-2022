@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\TestProvider;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -84,7 +85,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'de',
 
     /*
     |--------------------------------------------------------------------------
@@ -178,6 +179,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        TestProvider::class,
 
     ],
 
