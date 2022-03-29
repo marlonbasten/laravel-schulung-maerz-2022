@@ -35,3 +35,7 @@ Route::prefix('/posts')->name('post.')->group(function () {
 });
 
 Route::get('switchLocale/{locale}', [LocaleController::class, 'switchLocale'])->name('switchLocale');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
