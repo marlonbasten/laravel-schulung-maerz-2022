@@ -14,7 +14,10 @@ class PostController extends Controller
     {
         $user = User::find(1);
 
-        $posts = $user->posts()->where('created_at', '>=', now()->subYear())->get();
+        $posts = $user
+            ->posts()
+            ->where('created_at', '>=', now()->subYear())
+            ->get();
 
         return view('post.index', compact('posts'));
     }
