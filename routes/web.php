@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -32,3 +33,5 @@ Route::prefix('/posts')->name('post.')->group(function () {
     Route::get('/create', [PostController::class, 'create'])->name('create');
 
 });
+
+Route::get('switchLocale/{locale}', [LocaleController::class, 'switchLocale'])->name('switchLocale');

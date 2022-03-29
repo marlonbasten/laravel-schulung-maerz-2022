@@ -12,4 +12,7 @@
         'users' => $users,
     ])
 
+    <a href="{{ route('switchLocale', ['locale' => 'en']) }}"><button>EN</button></a>
+    <a href="{{ route('switchLocale', ['locale' => 'de']) }}"><button>DE</button></a>
+
 @endsection
