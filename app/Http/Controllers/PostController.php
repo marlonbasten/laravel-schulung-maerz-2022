@@ -12,12 +12,14 @@ class PostController extends Controller
 {
     public function index()
     {
-        $user = User::find(1);
+        // $user = User::find(1);
 
-        $posts = $user
-            ->posts()
-            ->where('created_at', '>=', now()->subYear())
-            ->get();
+        // $posts = $user
+        //     ->posts()
+        //     ->where('created_at', '>=', now()->subYear())
+        //     ->get();
+
+        $posts = Post::with('user')->get();
 
         return view('post.index', compact('posts'));
     }
