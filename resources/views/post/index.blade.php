@@ -30,11 +30,13 @@
                                 <th scope="row">{{ $post->id }}</th>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->user?->name }}</td>
-                                <td>{{ $post->created_at->format('d.m.Y H:i:s') }}</td>
+                                <td>{{ $post->created_at }}</td>
                               </tr>
                             @endforeach
                         </tbody>
                       </table>
+
+                      {{ $posts->links() }}
 
                 </div>
             </div>

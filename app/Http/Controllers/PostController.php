@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -19,7 +18,10 @@ class PostController extends Controller
         //     ->where('created_at', '>=', now()->subYear())
         //     ->get();
 
-        $posts = Post::with('user')->get();
+        $posts = Post::with('user')->paginate(10);
+
+        // $post = Post::onlyTrashed()->find(16);
+        // $post->restore();
 
         return view('post.index', compact('posts'));
     }

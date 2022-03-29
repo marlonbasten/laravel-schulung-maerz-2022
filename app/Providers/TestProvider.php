@@ -2,20 +2,11 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class TestProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-
     /**
      * Bootstrap services.
      *
@@ -23,5 +14,6 @@ class TestProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrapFive();
     }
 }

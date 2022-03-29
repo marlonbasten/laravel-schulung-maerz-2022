@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\Post
@@ -27,9 +30,23 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    // public function getCreatedAtAttribute($value)
+    // {
+    //     return Carbon::parse($value)->format('d.m.Y H:i:s');
+    // }
+
+    public function createdAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::parse($value)->format('d.m.Y H:i:s'),
+            // set: fn ($value) => Carbon::parse($value)->addYear()
+        );
     }
 }

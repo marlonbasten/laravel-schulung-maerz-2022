@@ -48,8 +48,13 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property int $user_id
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Query\Builder|Post onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|Post withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Post withoutTrashed()
  */
 	class Post extends \Eloquent {}
 }
