@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">{{ __('Post erstellen') }}</div>
+                <div class="card-header">{{ __('Post bearbeiten') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,15 +14,16 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('post.store') }}" method="POST">
+                    <form action="{{ route('post.update', ['id' => $post->id]) }}" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="mb-3">
                             <label for="title" class="form-label">Titel</label>
-                            <input type="text" name="title" class="form-control" id="title">
+                            <input type="text" name="title" class="form-control" id="title" value="{{ $post->title }}">
                         </div>
                         <div class="mb-3">
                             <label for="content" class="form-label">Inhalt</label>
-                            <textarea name="content" id="content" class="form-control"></textarea>
+                            <textarea name="content" id="content" class="form-control">{{ $post->content }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Speichern</button>
                     </form>

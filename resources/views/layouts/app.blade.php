@@ -39,6 +39,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('post.index') }}">{{ __('Posts') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('post.create') }}">{{ __('Post erstellen') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

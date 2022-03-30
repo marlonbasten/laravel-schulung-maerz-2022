@@ -21,6 +21,7 @@
                             <th scope="col">Title</th>
                             <th scope="col">Benutzer</th>
                             <th scope="col">Created at</th>
+                            <th scope="col">Aktionen</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -30,6 +31,15 @@
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->user?->name }}</td>
                                 <td>{{ $post->created_at }}</td>
+                                <td>
+                                    <a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-sm btn-primary">Bearbeiten</a>
+                                    <form action="{{ route('post.destroy') }}" method="POST" onsubmit="return confirm('Möchtest du den Post wirklich löschen?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="id" value="{{ $post->id }}">
+                                        <input type="submit" class="btn btn-sm btn-danger" value="Löschen">
+                                    </form>
+                                </td>
                               </tr>
                             @endforeach
                         </tbody>

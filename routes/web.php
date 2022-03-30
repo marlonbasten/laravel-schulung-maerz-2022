@@ -30,7 +30,10 @@ Route::prefix('/posts')->name('post.')->middleware('modifyRequestParams')->group
 
     Route::get('/', [PostController::class, 'index'])->name('index');
     Route::post('/', [PostController::class, 'store'])->name('store');
+    Route::delete('/', [PostController::class, 'destroy'])->name('destroy');
     Route::get('/create', [PostController::class, 'create'])->name('create');
+    Route::get('/{id}/edit', [PostController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [PostController::class, 'update'])->name('update');
 
 });
 

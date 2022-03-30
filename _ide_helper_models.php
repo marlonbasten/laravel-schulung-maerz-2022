@@ -61,6 +61,17 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Test
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Test newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Test newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Test query()
+ */
+	class Test extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id

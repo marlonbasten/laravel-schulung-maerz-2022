@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Post\DeletePostRequest;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -38,12 +40,45 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $post = new Post();
-        $post->title = $request->title;
-        $post->content = $request->content;
+        $post = new Post($request->validated());
         $post->user_id = auth()->id();
-        $post->save();
+        try {
+            $post->save();
+        } catch (QueryException $e) {
+            return redirect()->back()->withStatus($e->getMessage());
+        }
+
+        if($request->has('sendMail')) {
+            // Email senden...
+        }
 
         return redirect()->route('post.index')->with('status', 'Post wurde erfolgreich erstellt');
+    }
+
+    public function destroy(DeletePostRequest $request)
+    {
+        Post::destroy($request->id);
+
+        return redirect()->back();
+    }
+
+    public function edit(int $id)
+    {
+        $post = Post::findOrFail($id);
+
+        return view('post.edit', compact('post'));
+    }
+
+    public function update(StorePostRequest $request, int $id)
+    {
+        $post = Post::findOrFail($id);
+
+        if (Post::where('title', $request->title)->whereNot('id', $post->id)->first()) {
+            return redirect()->back()->withStatus('Ein Post mit diesem Titel existiert bereits!');
+        }
+
+        $post->update($request->validated());
+
+        return redirect()->back()->withStatus('Der Post wurde erfolgreich geupdatet!');
     }
 }
