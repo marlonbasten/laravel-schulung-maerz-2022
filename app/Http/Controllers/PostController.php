@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
@@ -76,6 +77,10 @@ class PostController extends Controller
     public function update(StorePostRequest $request, int $id)
     {
         $post = Post::findOrFail($id);
+
+        if (!auth()->user()->can('update', $post)) {
+            abort(403);
+        }
 
         if (Post::where('title', $request->title)->whereNot('id', $post->id)->first()) {
             return redirect()->back()->withStatus('Ein Post mit diesem Titel existiert bereits!');
