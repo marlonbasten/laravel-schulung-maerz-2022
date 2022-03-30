@@ -32,6 +32,7 @@
                                 <td>{{ $post->user?->name }}</td>
                                 <td>{{ $post->created_at }}</td>
                                 <td>
+                                    <a href="{{ route('post.show', ['post' => $post->id]) }}" class="btn btn-sm btn-success">Anzeigen</a>
                                     <a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-sm btn-primary">Bearbeiten</a>
                                     <form action="{{ route('post.destroy') }}" method="POST" onsubmit="return confirm('Möchtest du den Post wirklich löschen?');">
                                         @csrf

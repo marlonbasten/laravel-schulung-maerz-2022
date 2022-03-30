@@ -34,6 +34,7 @@ Route::prefix('/posts')->name('post.')->middleware('modifyRequestParams')->group
     Route::get('/create', [PostController::class, 'create'])->name('create');
     Route::get('/{id}/edit', [PostController::class, 'edit'])->name('edit');
     Route::put('/{id}', [PostController::class, 'update'])->name('update');
+    Route::get('/{post}', [PostController::class, 'show'])->name('show');
 
 });
 

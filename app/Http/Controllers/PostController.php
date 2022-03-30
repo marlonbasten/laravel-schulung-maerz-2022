@@ -81,4 +81,9 @@ class PostController extends Controller
 
         return redirect()->back()->withStatus('Der Post wurde erfolgreich geupdatet!');
     }
+
+    public function show(Post $post)
+    {
+        return view('post.edit', compact('post'));
+    }
 }
