@@ -20,6 +20,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Title</th>
                             <th scope="col">Benutzer</th>
+                            <th scope="col">Kategorien</th>
                             <th scope="col">Created at</th>
                             <th scope="col">Aktionen</th>
                           </tr>
@@ -30,6 +31,11 @@
                                 <th scope="row">{{ $post->id }}</th>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->user?->name }}</td>
+                                <td>
+                                    @foreach ($post->categories as $category)
+                                        <span class="badge bg-primary">{{ $category->name }}</span>
+                                    @endforeach
+                                </td>
                                 <td>{{ $post->created_at }}</td>
                                 <td>
                                     <a href="{{ route('post.show', ['post' => $post->id]) }}" class="btn btn-sm btn-success">Anzeigen</a>

@@ -21,7 +21,7 @@ class PostController extends Controller
         //     ->where('created_at', '>=', now()->subYear())
         //     ->get();
 
-        $posts = Post::with('user')->paginate(10);
+        $posts = Post::with(['user', 'categories'])->paginate(10);
 
         // $post = Post::onlyTrashed()->find(16);
         // $post->restore();
