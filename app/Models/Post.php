@@ -61,4 +61,9 @@ class Post extends Model
             // set: fn ($value) => Carbon::parse($value)->addYear()
         );
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }
