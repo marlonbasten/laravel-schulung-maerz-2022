@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Post\DeletePostRequest;
 use App\Http\Requests\StorePostRequest;
+use App\Mail\PostCreatedMail;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -50,7 +52,7 @@ class PostController extends Controller
         }
 
         if($request->has('sendMail')) {
-            // Email senden...
+            Mail::to('admin@webseite.de')->queue(new PostCreatedMail($post));
         }
 
         return redirect()->route('post.index')->with('status', 'Post wurde erfolgreich erstellt');

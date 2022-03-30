@@ -30,7 +30,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Post extends Model
 {
-    use ModelObserver;
+    // use ModelObserver;
     use HasFactory;
     use SoftDeletes;
 

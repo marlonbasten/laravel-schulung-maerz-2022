@@ -24,6 +24,10 @@
                             <label for="content" class="form-label">Inhalt</label>
                             <textarea name="content" id="content" class="form-control"></textarea>
                         </div>
+                        <div class="mb-3">
+                            <label for="sendMail" class="form-label">Email senden</label>
+                            <input type="checkbox" name="sendMail" id="sendMail">
+                        </div>
                         <button type="submit" class="btn btn-primary">Speichern</button>
                     </form>
 
