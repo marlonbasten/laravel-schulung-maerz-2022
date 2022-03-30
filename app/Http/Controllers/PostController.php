@@ -31,6 +31,11 @@ class PostController extends Controller
         return view('post.create');
     }
 
+    public function test(Request $request)
+    {
+        // ...
+    }
+
     public function store(StorePostRequest $request)
     {
         $post = new Post();

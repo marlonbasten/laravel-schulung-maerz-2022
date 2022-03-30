@@ -17,7 +17,7 @@ class LocaleMiddleware
     public function handle(Request $request, Closure $next, string $locale = null)
     {
         if(!$locale) {
-            $locale = session('locale', 'en');
+            $locale = session('locale');
         }
 
         app()->setLocale($locale);
