@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Post\DeletePostRequest;
 use App\Http\Requests\StorePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\QueryException;
@@ -65,8 +66,9 @@ class PostController extends Controller
     public function edit(int $id)
     {
         $post = Post::findOrFail($id);
+        $categories = Category::where('active', true)->get();
 
-        return view('post.edit', compact('post'));
+        return view('post.edit', compact('post', 'categories'));
     }
 
     public function update(StorePostRequest $request, int $id)
@@ -77,6 +79,7 @@ class PostController extends Controller
             return redirect()->back()->withStatus('Ein Post mit diesem Titel existiert bereits!');
         }
 
+        $post->categories()->sync($request->categories);
         $post->update($request->validated());
 
         return redirect()->back()->withStatus('Der Post wurde erfolgreich geupdatet!');

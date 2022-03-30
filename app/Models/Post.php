@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\ModelObserver;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,6 +30,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Post extends Model
 {
+    use ModelObserver;
     use HasFactory;
     use SoftDeletes;
 
@@ -36,6 +38,15 @@ class Post extends Model
        'title',
        'content',
    ];
+
+//    public static function boot()
+//    {
+//        parent::boot();
+
+//        self::saving(function ($model) {
+//             dd($model);
+//        });
+//    }
 
     // protected $guarded = [
     //     'id',

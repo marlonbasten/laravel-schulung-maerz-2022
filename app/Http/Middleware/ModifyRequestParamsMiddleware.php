@@ -19,6 +19,9 @@ class ModifyRequestParamsMiddleware
         $request_params = $request->all();
 
         foreach ($request_params as $key => $param) {
+            if (is_array($param)) {
+                continue;
+            }
             $request_params[$key] = ucfirst($param);
         }
 

@@ -25,6 +25,14 @@
                             <label for="content" class="form-label">Inhalt</label>
                             <textarea name="content" id="content" class="form-control">{{ $post->content }}</textarea>
                         </div>
+                        <div class="mb-3">
+                            <label for="categories" class="form-label">Kategorien</label>
+                            <select name="categories[]" id="categories" class="form-control" multiple>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" @if($post->categories()->where('categories.id', $category->id)->first()) selected @endif>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary">Speichern</button>
                     </form>
 
