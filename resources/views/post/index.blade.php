@@ -14,7 +14,6 @@
                         </div>
                     @endif
 
-
                     <table class="table">
                         <thead>
                           <tr>

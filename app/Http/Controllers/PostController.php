@@ -44,6 +44,6 @@ class PostController extends Controller
         $post->user_id = auth()->id();
         $post->save();
 
-        return redirect()->back()->withSuccess('Post wurde erfolgreich erstellt!');
+        return redirect()->route('post.index')->with('status', 'Post wurde erfolgreich erstellt');
     }
 }

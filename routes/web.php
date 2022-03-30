@@ -26,7 +26,7 @@ Route::get('/test2', [TestController::class, 'test2'])->name('test2');
 
 Route::get('/test3', [TestController::class, 'test3'])->name('test3');
 
-Route::prefix('/posts')->name('post.')->group(function () {
+Route::prefix('/posts')->name('post.')->middleware('modifyRequestParams')->group(function () {
 
     Route::get('/', [PostController::class, 'index'])->name('index');
     Route::post('/', [PostController::class, 'store'])->name('store');

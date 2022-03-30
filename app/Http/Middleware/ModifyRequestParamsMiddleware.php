@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class LocaleMiddleware
+class ModifyRequestParamsMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,13 @@ class LocaleMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $locale = session('locale');
+        $request_params = $request->all();
 
-        app()->setLocale($locale);
+        foreach ($request_params as $key => $param) {
+            $request_params[$key] = ucfirst($param);
+        }
+
+        $request->replace($request_params);
 
         return $next($request);
     }
