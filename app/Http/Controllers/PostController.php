@@ -48,7 +48,6 @@ class PostController extends Controller
     {
         $image = $request->file('image');
 
-
         $post = new Post($request->validated());
         $post->user_id = auth()->id();
 
