@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -52,12 +56,11 @@
 
 @section('scripts')
 <script>
-    function createPost() {
-        $.ajax({
+    $.ajax({
         type: "POST",
         url: '{{ route('post.store') }}',
         data: {
-            '_token': '{{ csrf_token() }}',
+            '_token': $("meta[name=csrf-token]").attr('content'),
             'title': 'Mein Test Post',
             'content': 'Das ist mein jQuery Content :)',
             'sendMail': false
@@ -69,6 +72,5 @@
         },
         dataType: 'json'
     });
-    }
 </script>
 @endsection

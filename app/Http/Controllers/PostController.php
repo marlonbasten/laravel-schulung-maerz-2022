@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Post\PostDeletedEvent;
 use App\Http\Requests\Post\DeletePostRequest;
 use App\Http\Requests\StorePostRequest;
 use App\Mail\PostCreatedMail;
@@ -81,7 +82,11 @@ class PostController extends Controller
 
     public function destroy(DeletePostRequest $request)
     {
-        Post::destroy($request->id);
+        $post = Post::find($request->id);
+
+        event(new PostDeletedEvent($post));
+
+        $post->delete();
 
         return redirect()->back();
     }
