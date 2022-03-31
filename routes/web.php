@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TestController;
@@ -35,6 +36,7 @@ Route::prefix('/posts')->name('post.')->middleware('modifyRequestParams')->group
     Route::get('/{id}/edit', [PostController::class, 'edit'])->name('edit');
     Route::put('/{id}', [PostController::class, 'update'])->name('update');
     Route::get('/{post}', [PostController::class, 'show'])->name('show');
+    Route::get('/{post}/image', [ImageController::class, 'getImage'])->name('image');
 
 });
 
@@ -43,3 +45,4 @@ Route::get('switchLocale/{locale}', [LocaleController::class, 'switchLocale'])->
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

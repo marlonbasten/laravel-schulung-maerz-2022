@@ -12,6 +12,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -44,8 +45,20 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
+        $image = $request->file('image');
+
+
         $post = new Post($request->validated());
         $post->user_id = auth()->id();
+
+        if ($image) {
+            $filename = uniqid().'-'.time().'.'.$image->getClientOriginalExtension();
+            $filepath = Storage::putFileAs('/images', $image, $filename);
+
+            $post->image_path = $filepath;
+            $post->image_type = $image->getMimeType();
+        }
+
         try {
             $post->save();
         } catch (QueryException $e) {

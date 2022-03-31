@@ -14,7 +14,15 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('post.store') }}" method="POST">
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger" role="alert">
+                                {{ $error }}
+                            </div>
+                        @endforeach
+                    @endif
+
+                    <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="title" class="form-label">Titel</label>
@@ -23,6 +31,10 @@
                         <div class="mb-3">
                             <label for="content" class="form-label">Inhalt</label>
                             <textarea name="content" id="content" class="form-control"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Bild</label>
+                            <input type="file" name="image" id="image" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label for="sendMail" class="form-label">Email senden</label>

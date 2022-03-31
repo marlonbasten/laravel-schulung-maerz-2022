@@ -28,7 +28,11 @@
                         <tbody>
                             @foreach ($posts as $post)
                                 <tr>
-                                <th scope="row">{{ $post->id }}</th>
+                                <th scope="row">
+                                    @if ($post->image_path && $post->user_id === auth()->id())
+                                        <img src="{{ route('post.image', ['post' => $post->id]) }}" alt="Image" height="75" width="75">
+                                    @endif
+                                </th>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->user?->name }}</td>
                                 <td>
@@ -40,6 +44,7 @@
                                 <td>
                                     <a href="{{ route('post.show', ['post' => $post->id]) }}" class="btn btn-sm btn-success">Anzeigen</a>
                                     <a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-sm btn-primary">Bearbeiten</a>
+                                    <a href="{{ route('post.image', ['post' => $post->id]) }}" class="btn btn-sm btn-primary" target="_blank">Bild</a>
                                     <form action="{{ route('post.destroy') }}" method="POST" onsubmit="return confirm('Möchtest du den Post wirklich löschen?');">
                                         @csrf
                                         @method('DELETE')
