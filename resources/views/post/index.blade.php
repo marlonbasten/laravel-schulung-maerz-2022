@@ -31,6 +31,8 @@
                                 <th scope="row">
                                     @if ($post->image_path && $post->user_id === auth()->id())
                                         <img src="{{ route('post.image', ['post' => $post->id]) }}" alt="Image" height="75" width="75">
+                                    @else
+                                        {{ $post->id }}
                                     @endif
                                 </th>
                                 <td>{{ $post->title }}</td>
