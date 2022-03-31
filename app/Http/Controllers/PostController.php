@@ -56,6 +56,13 @@ class PostController extends Controller
             Mail::to('admin@webseite.de')->queue(new PostCreatedMail($post));
         }
 
+        if ($request->expectsJson()) {
+            return [
+                'success' => true,
+                'message' => 'Der Post wurde erfolgreich erstellt!'
+            ];
+        }
+
         return redirect()->route('post.index')->with('status', 'Post wurde erfolgreich erstellt');
     }
 

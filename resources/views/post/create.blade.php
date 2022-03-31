@@ -37,3 +37,26 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+<script>
+    function createPost() {
+        $.ajax({
+        type: "POST",
+        url: '{{ route('post.store') }}',
+        data: {
+            '_token': '{{ csrf_token() }}',
+            'title': 'Mein Test Post',
+            'content': 'Das ist mein jQuery Content :)',
+            'sendMail': false
+        },
+        success: function (data) {
+            const json = JSON.parse(data);
+            console.log(data.message);
+            console.log(json);
+        },
+        dataType: 'json'
+    });
+    }
+</script>
+@endsection
