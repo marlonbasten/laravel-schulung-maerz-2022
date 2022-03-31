@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\PostServiceContract;
 use App\Events\Post\PostDeletedEvent;
 use App\Http\Requests\Post\DeletePostRequest;
 use App\Http\Requests\StorePostRequest;
@@ -17,6 +18,12 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function __construct(
+        private PostServiceContract $postService
+    ) {
+
+    }
+
     public function index()
     {
         // $user = User::find(1);
@@ -46,34 +53,10 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $image = $request->file('image');
+        $post = $this->postService->create($request);
 
-        $post = new Post($request->validated());
-        $post->user_id = auth()->id();
-
-        if ($image) {
-            $filename = uniqid().'-'.time().'.'.$image->getClientOriginalExtension();
-            $filepath = Storage::putFileAs('/images', $image, $filename);
-
-            $post->image_path = $filepath;
-            $post->image_type = $image->getMimeType();
-        }
-
-        try {
-            $post->save();
-        } catch (QueryException $e) {
-            return redirect()->back()->withStatus($e->getMessage());
-        }
-
-        if($request->has('sendMail')) {
-            Mail::to('admin@webseite.de')->queue(new PostCreatedMail($post));
-        }
-
-        if ($request->expectsJson()) {
-            return [
-                'success' => true,
-                'message' => 'Der Post wurde erfolgreich erstellt!'
-            ];
+        if (!$post) {
+            return redirect()->route('post.index')->with('status', 'Der Post konnte nicht erstellt werden');
         }
 
         return redirect()->route('post.index')->with('status', 'Post wurde erfolgreich erstellt');

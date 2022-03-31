@@ -14,10 +14,19 @@ class TestController extends Controller
 
     public function test2()
     {
-        $users = ['Nutzer1', 'Nutzer2', 'Nutzer3', 'Nutzer4'];
-        $age = 20;
+        if (!auth()->check()) {
+            abort(403);
+        }
 
-        return view('test2', compact('users', 'age'));
+        dd(auth()->user()->createToken('Admin Token', [
+            'show_posts',
+            'create_post',
+        ])->plainTextToken);
+
+        // $users = ['Nutzer1', 'Nutzer2', 'Nutzer3', 'Nutzer4'];
+        // $age = 20;
+
+        // return view('test2', compact('users', 'age'));
     }
 
     public function test3()
