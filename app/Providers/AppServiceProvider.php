@@ -14,6 +14,10 @@ use function GuzzleHttp\Promise\queue;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public $bindings = [
+        PostServiceContract::class => PostService::class,
+    ];
+
     /**
      * Register any application services.
      *
@@ -31,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->bind(PostServiceContract::class, PostService::class);
+        // $this->app->bind(PostServiceContract::class, PostService::class);
 
         Gate::define('update-post', function (User $user, Post $post) {
             return $user->id === $post->user_id;

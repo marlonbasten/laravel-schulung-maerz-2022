@@ -15,6 +15,16 @@
                     @endif
 
                     @livewire('counter')
+
+                    {{-- @php $count = 0; @endphp
+                    @foreach (range(0, 20) as $i)
+                        @foreach (range(0, 20) as $j)
+                            {{ $i }} {{ $j }}
+                            @php $count++; @endphp
+                        @endforeach
+                    @endforeach
+
+                    {{ $count }} --}}
                 </div>
             </div>
         </div>

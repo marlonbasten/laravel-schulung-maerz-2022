@@ -101,6 +101,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        return view('post.edit', compact('post'));
+        $categories = Category::where('active', true)->get();
+        return view('post.edit', compact('post', 'categories'));
     }
 }
