@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PostService implements PostServiceContract
 {
-	public function create(Request $request): ?Post
+    public function create(Request $request): ?Post
     {
         $image = $request->file('image');
 
@@ -20,7 +20,7 @@ class PostService implements PostServiceContract
         $post->user_id = auth()->id();
 
         if ($image) {
-            $filename = uniqid().'-'.time().'.'.$image->getClientOriginalExtension();
+            $filename = uniqid('', true) . '-' . time() . '.' . $image->getClientOriginalExtension();
             $filepath = Storage::putFileAs('/images', $image, $filename);
 
             $post->image_path = $filepath;
@@ -33,10 +33,10 @@ class PostService implements PostServiceContract
             return null;
         }
 
-        if($request->has('sendMail')) {
+        if ($request->has('sendMail')) {
             Mail::to('admin@webseite.de')->queue(new PostCreatedMail($post));
         }
 
         return $post;
-	}
+    }
 }
