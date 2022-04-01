@@ -80,11 +80,15 @@ namespace App\Models{
  * @mixin \Eloquent
  * @property int $user_id
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property string|null $image_path
+ * @property string|null $image_type
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
  * @property-read int|null $categories_count
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Query\Builder|Post onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereImagePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereImageType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|Post withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Post withoutTrashed()
