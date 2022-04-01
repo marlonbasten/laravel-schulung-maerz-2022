@@ -6,22 +6,17 @@ use App\Contracts\PostServiceContract;
 use App\Events\Post\PostDeletedEvent;
 use App\Http\Requests\Post\DeletePostRequest;
 use App\Http\Requests\StorePostRequest;
-use App\Mail\PostCreatedMail;
 use App\Models\Category;
 use App\Models\Post;
-use App\Models\User;
-use Illuminate\Database\QueryException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
     public function __construct(
         private PostServiceContract $postService
-    ) {
-
+    )
+    {
     }
 
     public function index()
@@ -51,7 +46,7 @@ class PostController extends Controller
         // ...
     }
 
-    public function store(StorePostRequest $request)
+    public function store(StorePostRequest $request): RedirectResponse
     {
         $post = $this->postService->create($request);
 

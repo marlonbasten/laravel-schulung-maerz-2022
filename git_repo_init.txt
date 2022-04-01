@@ -1,0 +1,9 @@
+1. Neuen Ordner erstellen
+2. Git repo mit "git init" initialisieren
+3. Git repository anlegen
+4. git remote add origin {GIT URL}
+5. git branch -M {BRANCH}
+6. Initiale Dateien anlegen
+7. git add .
+8. git commit -m "{MESSAGE}"
+9. git push -u origin {BRANCH}
