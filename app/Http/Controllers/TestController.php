@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
@@ -18,10 +17,16 @@ class TestController extends Controller
             abort(403);
         }
 
-        dd(auth()->user()->createToken('Admin Token', [
-            'show_posts',
-            'create_post',
-        ])->plainTextToken);
+//        if (!auth()->user()?->can('view posts')) {
+//            abort(403);
+//        }
+
+        echo 'toll';
+
+//        dd(auth()->user()->createToken('Admin Token', [
+//            'show_posts',
+//            'create_post',
+//        ])->plainTextToken);
 
         // $users = ['Nutzer1', 'Nutzer2', 'Nutzer3', 'Nutzer4'];
         // $age = 20;
@@ -40,12 +45,12 @@ class TestController extends Controller
         $posts = Post::where('title', 'test')
             ->orderBy('id', 'desc')
             ->get()
-            ->reject(fn ($post) => $post->content === 'test')
-            ->map(fn ($post) => [
-                    'id' => $post->id,
-                    'title' => $post->title,
-                    'content' => $post->content
-                ])
+            ->reject(fn($post) => $post->content === 'test')
+            ->map(fn($post) => [
+                'id' => $post->id,
+                'title' => $post->title,
+                'content' => $post->content
+            ])
             ->count();
 
 

@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 Route::get('/test/{name}/{age?}', [TestController::class, 'test'])->name('test');
 
-Route::get('/test2', [TestController::class, 'test2'])->name('test2');
+Route::get('/test2', [TestController::class, 'test2'])->name('test2')->middleware('can:create posts');
 
 Route::get('/test3', [TestController::class, 'test3'])->name('test3');
 
